@@ -18,7 +18,12 @@ interface ICreateUserUseCaseResponse {
 export class CreateUserUseCase {
 	constructor(private userRepository: IUserRepository) {}
 
-	async execute({ name, email, password, phone }: ICreateUserUseCaseRequest): Promise<ICreateUserUseCaseResponse> {
+	async execute({
+		name,
+		email,
+		password,
+		phone,
+	}: ICreateUserUseCaseRequest): Promise<ICreateUserUseCaseResponse> {
 		const userAlreadyExists = await this.userRepository.findByEmail(email);
 
 		if (userAlreadyExists) {

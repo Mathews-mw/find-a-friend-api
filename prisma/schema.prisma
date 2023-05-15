@@ -36,13 +36,14 @@ enum PetEnvironment {
 }
 
 model User {
-  id         String   @id @default(uuid())
+  id         String      @id @default(uuid())
   name       String
-  email      String   @unique
+  email      String      @unique
   password   String
   phone      String?
-  role       Role     @default(MEMBER)
-  created_at DateTime @default(now())
+  role       Role        @default(MEMBER)
+  created_at DateTime    @default(now())
+  OrgsUsers  OrgsUsers[]
 
   @@map("users")
 }
@@ -57,6 +58,7 @@ model Org {
   created_at DateTime @default(now())
 
   orgsAddress OrgsAddress[]
+  OrgsUsers   OrgsUsers[]
 
   @@map("orgs")
 }
@@ -123,4 +125,16 @@ model OrgsAddress {
 
   @@index([org_id])
   @@map("orgs_address")
+}
+
+model OrgsUsers {
+  id      String @id @default(uuid())
+  org_id  String
+  user_id String
+
+  org  Org  @relation(fields: [org_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  user User @relation(fields: [user_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
+
+  @@index([org_id, user_id])
+  @@map("orgs_users")
 }

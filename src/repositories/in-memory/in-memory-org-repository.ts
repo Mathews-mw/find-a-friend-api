@@ -3,7 +3,7 @@ import { IOrgRepository } from '../implementations/IOrgRepository';
 import { randomUUID } from 'node:crypto';
 
 export class InMemoryOrgRepository implements IOrgRepository {
-	private orgs: Org[] = [];
+	public orgs: Org[] = [];
 
 	async create(data: Prisma.OrgUncheckedCreateInput) {
 		const newOrg = {
