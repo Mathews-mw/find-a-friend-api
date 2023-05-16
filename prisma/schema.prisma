@@ -72,6 +72,7 @@ model Pet {
   environment  PetEnvironment
   about        String?
   image        String?
+  adopted      Boolean        @default(false)
   created_at   DateTime       @default(now())
 
   petsRequirements PetsRequirements[]

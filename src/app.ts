@@ -3,10 +3,13 @@ import { ZodError } from 'zod';
 import fastifyCookie from '@fastify/cookie';
 
 import { env } from './env';
+import { routes } from './routes/index.routes';
 
 export const app = fastify();
 
 app.register(fastifyCookie);
+
+app.register(routes, { prefix: '/api' });
 
 app.setErrorHandler((error, _, reply) => {
 	if (error instanceof ZodError) {

@@ -1,9 +1,9 @@
+import { z } from 'zod';
+import { FastifyReply, FastifyRequest } from 'fastify';
 import { UserAlreadyExistsError } from '@/useCases/errors/user-already-exists-error';
 import { makeCreateUserUseCase } from '@/useCases/factories/make-create-user-use-case';
-import { FastifyReply, FastifyRequest } from 'fastify';
-import { z } from 'zod';
 
-export async function create(
+export async function createUserController(
 	requset: FastifyRequest,
 	reply: FastifyReply
 ): Promise<FastifyReply> {
